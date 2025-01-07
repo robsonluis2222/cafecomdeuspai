@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.book-sales-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.text-marq{
+  width: 100vw;
+  background-color: black;
+  color: white;
+  padding: 6px;
+  margin-bottom: 30px;
+  font-family: "Anton", serif;
+  font-weight: 400;
+  font-size: 25px;
+  font-style: normal;
+}
+
+/* Estilo para o contêiner do produto */
+.product-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 40px;
+}
+
+/* Estilo para a imagem do produto */
+.product-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.book-cover {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Botões do carrossel */
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #007BFF;
+  color: white;
+  font-size: 2rem;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 10;
+}
+
+.carousel-button.left {
+  left: -60px;
+}
+
+.carousel-button.right {
+  right: -60px;
+}
+
+.carousel-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para as informações do produto */
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.starts {
+  width: 35px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.bi-star-fill{
+  color: rgb(238, 193, 46);
+}
+
+.product-previous-price {
+  font-size: 1.1rem;
+  color: #e74c3c;
+  margin: 10px 0;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  color: #145c06;
+  margin: 10px 0;
+}
+
+.purchase-button {
+  background-color: #007BFF;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.purchase-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para as informações adicionais sobre o livro e autor */
+.book-description, .author-info {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.book-description h2, .author-info h3 {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.book-description p, .author-info p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Estilos para o modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+form {
+  margin-top: 20px;
+}
+
+label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input {
+  width: 80%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+ul{
+  list-style-type: none;  /* Remove as bolinhas */
+  padding: 0;  /* Remove o preenchimento */
+
+}
+li{
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+}
+li:hover{
+  background-color: black;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .carousel-button.left {
+    left: 30px; /* Botão de navegação à esquerda */
+  }
+
+  .carousel-button.right {
+    right: 30px; /* Botão de navegação à direita */
+  }
+}
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+
+  .product-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .product-image {
+    margin-bottom: 20px;
+  }
+
+  .book-cover {
+    width: 200px;
+  }
+
+  .product-info {
+    align-items: center;
+  }
+
+  .product-price {
+    font-size: 1.2rem;
+  }
+
+  .purchase-button {
+    font-size: 1rem;
+  }
+
+  .carousel-button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
