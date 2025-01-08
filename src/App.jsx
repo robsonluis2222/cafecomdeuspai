@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import QRCode from 'qrcode';
+import Qrcode from '../src/components/Qrcode';
 import Livro1 from '../public/box1.png';
 import Livro2 from '../public/box2.png';
 import Livro3 from '../public/box3.png';
 import Livro4 from '../public/box4.png';
 import "bootstrap-icons/font/bootstrap-icons.css";
-
-import './App.css'; // Arquivo de estilos (CSS)
+import './App.css';
 
 const App = () => {
   // Definir as imagens para o carrossel
@@ -16,11 +17,18 @@ const App = () => {
 
   // Estado para controlar a visibilidade do modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFreteVisible, setIsFreteVisible] = useState(false);
+  const [isFreteVisible, setIsFreteVisible] = useState(false); // Frete visível após inserir o CEP
   const [isPaymentVisible, setIsPaymentVisible] = useState(false); // Estado para exibir opções de pagamento
   const [cep, setCep] = useState('');
-  const [freteOptions, setFreteOptions] = useState([]);
   const [selectedFrete, setSelectedFrete] = useState(null); // Estado para armazenar o frete selecionado
+  const [isPixPayment, setIsPixPayment] = useState(false); // Estado para controlar a exibição do QR Code
+
+  // Definindo as opções fixas de frete
+  const freteOptions = [
+    { tipo: "Correios", valor: "24.77", prazo: "2 dias" },
+    { tipo: "Jadlog", valor: "16.30", prazo: "7 dias" },
+    { tipo: "Sedex", valor: "22.36", prazo: "8 dias" }
+  ];
 
   // Função para abrir o modal
   const openModal = () => {
@@ -33,8 +41,8 @@ const App = () => {
     setIsFreteVisible(false);
     setIsPaymentVisible(false);
     setCep('');
-    setFreteOptions([]);
     setSelectedFrete(null); // Limpar o frete selecionado
+    setIsPixPayment(false); // Resetar a exibição do QR Code
   };
 
   // Função para navegar para a imagem anterior
@@ -49,24 +57,12 @@ const App = () => {
     setCurrentIndex(isLastImage ? 0 : currentIndex + 1);
   };
 
-  // Função para gerar opções de frete aleatórias
-  const generateFreteOptions = () => {
-    const fretes = [
-      { tipo: "Correios", valor: (Math.random() * (30 - 10) + 10).toFixed(2), prazo: `${Math.floor(Math.random() * 5) + 1} dias úteis` },
-      { tipo: "Jadlog", valor: (Math.random() * (20 - 5) + 5).toFixed(2), prazo: `${Math.floor(Math.random() * 10) + 3} dias úteis` },
-      { tipo: "Sedex", valor: (Math.random() * (50 - 20) + 20).toFixed(2), prazo: `${Math.floor(Math.random() * 15) + 5} dias úteis` },
-    ];
-
-    setFreteOptions(fretes);
-    setIsFreteVisible(true);
-  };
-
   // Função para lidar com o envio do CEP
   const handleCepSubmit = (e) => {
     e.preventDefault();
     // Validação simples de CEP (apenas exemplo)
     if (cep.length === 8 && !isNaN(cep)) {
-      generateFreteOptions();
+      setIsFreteVisible(true); // Mostrar as opções de frete
     } else {
       alert("CEP inválido!");
     }
@@ -77,6 +73,14 @@ const App = () => {
     setSelectedFrete(frete); // Salvar o frete selecionado
     setIsFreteVisible(false); // Esconder as opções de frete
     setIsPaymentVisible(true); // Mostrar as opções de pagamento
+  };
+
+  // Chave PIX (Celular)
+  const chavePix = "47996561461";
+
+  // Função para ativar o pagamento via PIX
+  const handlePixPayment = () => {
+    setIsPixPayment(true); // Mostrar o QR Code após o clique
   };
 
   return (
@@ -132,6 +136,8 @@ const App = () => {
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={closeModal}>&times;</span>
+
+            {/* Mostrar formulário de CEP */}
             {!isPaymentVisible && (
               <>
                 <h2>Informe seu CEP</h2>
@@ -173,8 +179,22 @@ const App = () => {
                 <p>Frete: R$ {selectedFrete.valor}</p>
                 <form>
                   <label htmlFor="payment-method">Método de Pagamento:</label>
-                  <button type="submit" className="submit-button">PIX</button>
+                  <button
+                    type="button"
+                    className="submit-button"
+                    onClick={handlePixPayment}
+                  >
+                    PIX
+                  </button>
                 </form>
+
+                {/* Exibir QR Code do Pix abaixo do botão quando o botão PIX for clicado */}
+                {isPixPayment && (
+                  <div className="qrcode-container">
+                    <h3>Pagamento via PIX<br />Copia e Cola:</h3>
+                    <Qrcode valorTransacao={47 + parseFloat(selectedFrete.valor)} />
+                  </div>
+                )}
               </>
             )}
           </div>

@@ -1,0 +1,16 @@
+/* Estilo para o botão "Copiar Payload" */
+.button-copiar {
+  background-color: #0056b3; /* Cor de fundo verde */
+  color: white; /* Texto branco */
+  padding: 10px 20px; /* Espaciamento interno */
+  border: none; /* Sem borda */
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 16px; /* Tamanho da fonte */
+  cursor: pointer; /* Muda o cursor para mãozinha */
+  transition: background-color 0.3s ease; /* Efeito de transição suave */
+}
+
+/* Estilo quando o mouse passar sobre o botão */
+.button-copiar:hover {
+  background-color: #1613ad; /* Cor de fundo levemente mais escura */
+}
